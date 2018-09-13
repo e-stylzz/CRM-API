@@ -14,5 +14,10 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
+  
+  <ItemGroup>
+        <ProjectReference Include="..\CRM-API.Infrastructure\CRM-API.Infrastructure.csproj" />
+        <ProjectReference Include="..\CRM-API.Service\CRM-API.Service.csproj" />
+  </ItemGroup>
 
 </Project>

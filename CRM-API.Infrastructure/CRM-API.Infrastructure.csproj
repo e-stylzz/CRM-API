@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -9,11 +9,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="Properties\launchSettings.json" />
+        <ProjectReference Include="..\CRM-API.Domain\CRM-API.Domain.csproj" />
   </ItemGroup>
+
   <ItemGroup>
     <Folder Include="Configuration\" />
-    <Folder Include="DataAccess\" />
     <Folder Include="Repository\" />
   </ItemGroup>
 </Project>
