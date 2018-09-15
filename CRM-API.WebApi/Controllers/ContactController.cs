@@ -28,9 +28,21 @@ namespace CRMAPI.WebApi.Controllers
 
 
 
-        // GET: api/contact
+        /// <summary>
+        ///  Returns all of your contacts
+        /// </summary>
+        /// <remarks>
+        /// Sample Request:
+        /// 
+        ///     GET /Contact
+        /// 
+        /// </remarks>
+        /// <returns>All Contacts</returns>
+        /// <response code="200">Returns all contacts</response>
+        /// <response code="401">If you are not authorized</response>
         [HttpGet]
         [ProducesResponseType(typeof(ContactDto), 200)]
+        [ProducesResponseType(401)]
         public IActionResult GetAll()
         {
             var contact = contactService.GetContacts();
@@ -39,9 +51,15 @@ namespace CRMAPI.WebApi.Controllers
         }
 
 
-        // GET api/contact/5
+        /// <summary>
+        ///  Returns a specific contact by Id
+        /// </summary>
+        /// <returns>The all.</returns>
+        /// <response code="200">Returns specific contact contacts</response>
+        /// <response code="401">If you are not authorized</response>
         [HttpGet("{id}", Name = "GetContact")]
         [ProducesResponseType(typeof(ContactDto), 200)]
+        [ProducesResponseType(401)]
         public IActionResult Get(Guid id)
         {
             var contact = contactService.GetContact(id);

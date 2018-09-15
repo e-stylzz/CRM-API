@@ -15,11 +15,17 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="AutoMapper" Version="7.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="3.0.0" />
   </ItemGroup>
   
   <ItemGroup>
         <ProjectReference Include="..\CRM-API.Infrastructure\CRM-API.Infrastructure.csproj" />
         <ProjectReference Include="..\CRM-API.Service\CRM-API.Service.csproj" />
   </ItemGroup>
+      
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
 
 </Project>
