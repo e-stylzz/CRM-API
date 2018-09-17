@@ -12,6 +12,9 @@ namespace CRMAPI.Infrastructure.Repository
     {
         IEnumerable<T> GetAll();
         T Get(Guid id);
+        void Insert(T entity);
+        void Update(T entity);
+        void Delete(T entity);
     }
 
     public class Repository<T> : IRepository<T> where T : BaseEntity
@@ -35,5 +38,40 @@ namespace CRMAPI.Infrastructure.Repository
             return entities.SingleOrDefault(s => s.Id == id);
         }
 
+        public void Insert(T entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+            entity.CreatedDate = DateTime.UtcNow;
+            //  var name = accessor.HttpContact.User.FindFirst(ClaimTypes.Name).Value;
+            var name = "Eric Barb";
+            entity.CreatedBy = name;
+            entities.Add(entity);
+            context.SaveChanges();
+        }
+
+        public void Update(T entity)
+        {
+            if (entity == null){
+                throw new ArgumentException(nameof(entity));
+            }
+            entity.ModifiedDate = DateTime.UtcNow;
+            //  var name = accessor.HttpContact.User.FindFirst(ClaimTypes.Name).Value;
+            var name = "Eric Barb";
+            entity.ModifiedBy = name;
+            context.SaveChanges();
+        }
+
+        public void Delete(T entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentException(nameof(entity));
+            }
+            entities.Remove(entity);
+            context.SaveChanges();
+        }
     }
 }

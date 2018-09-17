@@ -10,6 +10,9 @@ namespace CRMAPI.Service
     {
         IEnumerable<Contact> GetContacts();
         Contact GetContact(Guid id);
+        void CreateContact(Contact contact);
+        void UpdateContact(Contact contact);
+        void DeleteContact(Guid id);
     }
 
     public class ContactService : IContactService
@@ -28,6 +31,22 @@ namespace CRMAPI.Service
         public Contact GetContact(Guid id)
         {
             return contactRepository.Get(id);
+        }
+
+        public void CreateContact(Contact contact)
+        {
+            contactRepository.Insert(contact);
+        }
+
+        public void UpdateContact(Contact contact)
+        {
+            contactRepository.Update(contact);
+        }
+
+        public void DeleteContact(Guid id)
+        {
+            Contact contact = GetContact(id);
+            contactRepository.Delete(contact);
         }
     }
 }

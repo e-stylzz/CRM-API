@@ -9,6 +9,7 @@
     <Folder Include="DTO\" />
     <Folder Include="Hubs\" />
     <Folder Include="Profiles\" />
+    <Folder Include="DTO\Contact\" />
   </ItemGroup>
 
   <ItemGroup>
