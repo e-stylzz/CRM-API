@@ -8,6 +8,7 @@ using AutoMapper;
 using CRMAPI.Infrastructure.DataAccess;
 using CRMAPI.Infrastructure.Repository;
 using CRMAPI.Service;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -45,6 +46,13 @@ namespace CRM_API.WebApi
             services.AddAutoMapper();
             services.AddTransient<IContactService, ContactService>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                    .AddJwtBearer(options =>
+                    {
+                        options.Audience = Configuration["AzureAD:ClientID"];
+                        options.Authority= $"https://login.microsoftonline.com/tfp/{Configuration["AzureAD:Tenant"]}/{Configuration["AzureAD:Policy"]}/v2.0/";
+                        // options.Authority = $"{Configuration["AzureAD:AadInstance"]}{Configuration["AzureAD:Tenant"]}";
+                    });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "CRM API", Version = "v1" });
@@ -76,6 +84,7 @@ namespace CRM_API.WebApi
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "CRM API");
             });
+            app.UseAuthentication();
             app.UseMvc();
         }
     }

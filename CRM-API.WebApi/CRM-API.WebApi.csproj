@@ -24,6 +24,9 @@
         <ProjectReference Include="..\CRM-API.Service\CRM-API.Service.csproj" />
   </ItemGroup>
       
+  <ItemGroup>
+    <Compile Remove="Controllers\ValuesController.cs" />
+  </ItemGroup>
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>

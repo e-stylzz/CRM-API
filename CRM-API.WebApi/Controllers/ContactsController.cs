@@ -7,6 +7,7 @@ using AutoMapper;
 using CRMAPI.WebApi.DTO;
 using CRMAPI.Service;
 using CRMAPI.Domain.Models;
+using Microsoft.AspNetCore.Authorization;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -42,6 +43,7 @@ namespace CRMAPI.WebApi.Controllers
         /// <response code="200">Returns all contacts</response>
         /// <response code="401">If you are not authorized</response>
         [HttpGet]
+        [Authorize]
         [ProducesResponseType(typeof(ContactDto), 200)]
         [ProducesResponseType(401)]
         public IActionResult GetAll()
@@ -59,6 +61,7 @@ namespace CRMAPI.WebApi.Controllers
         /// <response code="200">Returns specific contact contacts</response>
         /// <response code="401">If you are not authorized</response>
         [HttpGet("{id}", Name = "GetContact")]
+        [Authorize]
         [ProducesResponseType(typeof(ContactDto), 200)]
         [ProducesResponseType(401)]
         public IActionResult Get(Guid id)
@@ -73,8 +76,6 @@ namespace CRMAPI.WebApi.Controllers
             return Ok(viewModel);
         }
 
-
-
         /// <summary>
         ///  Creates a contact
         /// </summary>
@@ -83,6 +84,7 @@ namespace CRMAPI.WebApi.Controllers
         /// <response code="400">If the data is invalid</response>
         /// <response code="401">If you are not authorized</response>
         [HttpPost]
+        [Authorize]
         [ProducesResponseType(typeof(ContactDto), 200)]
         [ProducesResponseType(typeof(IDictionary<string, string>), 400)]
         [ProducesResponseType(typeof(void), 500)]
@@ -117,6 +119,7 @@ namespace CRMAPI.WebApi.Controllers
         /// <response code="401">If you are not authorized</response>
         /// <response code="500">Server Exception</response>
         [HttpPut("{id}")]
+        [Authorize]
         [ProducesResponseType(typeof(void), 200)]
         [ProducesResponseType(typeof(IDictionary<string, string>), 400)]
         [ProducesResponseType(typeof(void), 500)]
@@ -149,8 +152,6 @@ namespace CRMAPI.WebApi.Controllers
             return NoContent();
         }
 
-
-
         /// <summary>
         ///  Deletes a contact
         /// </summary>
@@ -160,6 +161,7 @@ namespace CRMAPI.WebApi.Controllers
         /// <response code="401">If you are not authorized</response>
         /// <response code="500">Server Exception</response>
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult DeleteContact(Guid id)
         {
             var contact = contactService.GetContact(id);
